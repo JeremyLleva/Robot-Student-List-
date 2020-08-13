@@ -11,3 +11,7 @@
     background-color: white;
     border-radius: 25px;
 }
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}

@@ -15,13 +15,14 @@
 }
 .image {
     width: 200px;
-    border: 5px solid grey;
+    border: 1px solid grey;
     border-radius: 50%;
 }
 .informationContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-bottom: 20px;
 }
 .descriptionText {
     text-align: left;
