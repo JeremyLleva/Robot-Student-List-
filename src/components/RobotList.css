@@ -2,7 +2,7 @@
 
 .listContainer {
     margin-top: 50px;
-    height: 600px;
+    height: 750px;
     width: 1250px;
     overflow-y: scroll;
     display: flex;
@@ -14,4 +14,28 @@
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
+}
+
+.filterContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.filter {
+    padding-top: 5px;
+    font-size: 50px;
+    display: flex;
+    width: 100%;
+    height: 50px;
+}
+.studentContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.gradesList {
+    text-align: left;
 }

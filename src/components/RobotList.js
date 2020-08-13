@@ -9,37 +9,80 @@ class RobotList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            items: [],
+            nameFilter: '',
+            students: [],
         }
+    }
+
+    nameFilterHandler = (event) => {
+        this.setState({ nameFilter: event.target.value })
     }
 
     async componentDidMount() {
         const url = 'https://www.hatchways.io/api/assessment/students'
         const response = await fetch(url)
         const data = await response.json()
-        this.setState({ items: data })
+        let updatedStudentData = data.students.map((obj) => ({
+            ...obj,
+            tags: [],
+        }))
+
+        this.setState({
+            students: updatedStudentData,
+        })
     }
     render() {
-        const { items } = this.state
-        let studentList = items.students
-        console.log(studentList)
-        if (studentList) {
+        const { nameFilter, students, tagFilter } = this.state
+        if (students) {
             return (
-                <div className='listContainer'>
-                    {studentList.map((student) => {
-                        return (
-                            <RobotEntry
-                                firstname={student.firstName}
-                                lastname={student.lastName}
-                                email={student.email}
-                                city={student.city}
-                                grades={student.grades}
-                                company={student.company}
-                                skill={student.skill}
-                                pic={student.pic}
+                <div>
+                    <div className='listContainer'>
+                        <div className='filterContainer'>
+                            <input
+                                placeholder='Search by Name'
+                                type='text'
+                                value={nameFilter}
+                                onChange={(e) => {
+                                    this.nameFilterHandler(e)
+                                }}
+                                className='filter'
                             />
-                        )
-                    })}
+                        </div>
+                        <div className='studentContainer'>
+                            {students
+                                .filter((students) => {
+                                    if (
+                                        students.firstName
+                                            .toLowerCase()
+                                            .includes(
+                                                this.state.nameFilter.toLowerCase()
+                                            ) ||
+                                        students.lastName
+                                            .toLowerCase()
+                                            .includes(
+                                                this.state.nameFilter.toLowerCase()
+                                            )
+                                    )
+                                        return true
+                                    else {
+                                        return false
+                                    }
+                                })
+                                .map((student) => {
+                                    return (
+                                        <RobotEntry
+                                            firstname={student.firstName}
+                                            lastname={student.lastName}
+                                            email={student.email}
+                                            grades={student.grades}
+                                            company={student.company}
+                                            skill={student.skill}
+                                            pic={student.pic}
+                                        />
+                                    )
+                                })}
+                        </div>
+                    </div>
                 </div>
             )
         } else {

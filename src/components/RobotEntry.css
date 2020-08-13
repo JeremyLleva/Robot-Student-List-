@@ -22,11 +22,44 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 20px;
+    width: 60%;
 }
 .descriptionText {
     text-align: left;
 }
 .headerText {
     margin-bottom: 5px;
+}
+.expand-btn-container {
+    display: flex;
+    justify-content: end;
+}
+.expand-btn {
+    height: 100px;
+    width: 100px;
+    font-size: 50px;
+}
+.showMore {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.tagsContainer {
+    display: flex;
+    flex-direction: row;
+}
+.tags {
+    border: solid;
+    border-radius: 15%;
+    margin: 10px;
+    padding: 10px;
+}
+.formContainer {
+    display: flex;
+    align-items: center;
+    margin: 10;
+}
+.add-tag-input {
+    height: 50px;
+    font-size: 45px;
 }

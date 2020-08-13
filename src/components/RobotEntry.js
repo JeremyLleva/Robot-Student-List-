@@ -4,6 +4,31 @@ import React from 'react'
 import './RobotEntry.css'
 
 class RobotEntry extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            showMore: false,
+            tag: '',
+            tags: [],
+        }
+    }
+    addTag = (event) => {
+        let newTag = this.state.tag.trim()
+        let updatedTags = this.state.tags.concat(newTag)
+        this.setState({ tags: updatedTags })
+        event.preventDefault()
+    }
+
+    updateTagValue = (tag) => {
+        this.setState({
+            tag: tag,
+        })
+    }
+    toggle = () => {
+        this.setState({
+            showMore: !this.state.showMore,
+        })
+    }
     render() {
         const {
             firstname,
@@ -15,11 +40,11 @@ class RobotEntry extends React.Component {
             skill,
             pic,
         } = this.props
+
         let total = 0
         for (var i = 0; i < grades.length; i++) {
             total += parseInt(grades[i])
         }
-        console.log(total)
         let avg = total / grades.length
         return (
             <div className='entryContainer'>
@@ -38,6 +63,55 @@ class RobotEntry extends React.Component {
                         <div className='descriptionText'>Skill: {skill}</div>
                         <div className='descriptionText'>Average: {avg}%</div>
                     </div>
+                    <div className='showMore'>
+                        {this.state.showMore && (
+                            <div>
+                                {this.props.grades.map((name, index) => {
+                                    return (
+                                        <div className='gradesList' key={index}>
+                                            Test {index + 1}: {name}%
+                                        </div>
+                                    )
+                                })}
+                                {this.state.tags && (
+                                    <div className='tagsContainer'>
+                                        {this.state.tags.map((x) => (
+                                            <div className='tags'>{x}</div>
+                                        ))}
+                                    </div>
+                                )}
+                                <div className='formContainer'>
+                                    <form onSubmit={this.addTag}>
+                                        <input
+                                            className='add-tag-input'
+                                            value={this.state.tagsInput}
+                                            onChange={(e) => {
+                                                this.updateTagValue(
+                                                    e.target.value
+                                                )
+                                            }}
+                                            type='text'
+                                            placeholder='Add a tag'
+                                        />
+                                    </form>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                <div className='expand-btn-container'>
+                    {!this.state.showMore && (
+                        <button className='expand-btn' onClick={this.toggle}>
+                            +
+                        </button>
+                    )}
+
+                    {this.state.showMore && (
+                        <button className='expand-btn' onClick={this.toggle}>
+                            -
+                        </button>
+                    )}
                 </div>
             </div>
         )
