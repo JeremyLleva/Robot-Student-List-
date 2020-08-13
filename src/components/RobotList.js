@@ -32,7 +32,7 @@ class RobotList extends React.Component {
         })
     }
     render() {
-        const { nameFilter, students, tagFilter } = this.state
+        const { nameFilter, students } = this.state
         if (students) {
             return (
                 <div>
@@ -50,7 +50,12 @@ class RobotList extends React.Component {
                         </div>
                         <div className='studentContainer'>
                             {students
+                                //Filters student array based on filter start
                                 .filter((students) => {
+                                    //Make sure filter works based on their fullname not just first or lastname
+                                    let studentFullName = students.firstName.concat(
+                                        ` ${students.lastName}`
+                                    )
                                     if (
                                         students.firstName
                                             .toLowerCase()
@@ -58,6 +63,11 @@ class RobotList extends React.Component {
                                                 this.state.nameFilter.toLowerCase()
                                             ) ||
                                         students.lastName
+                                            .toLowerCase()
+                                            .includes(
+                                                this.state.nameFilter.toLowerCase()
+                                            ) ||
+                                        studentFullName
                                             .toLowerCase()
                                             .includes(
                                                 this.state.nameFilter.toLowerCase()
@@ -70,6 +80,7 @@ class RobotList extends React.Component {
                                 })
                                 .map((student) => {
                                     return (
+                                        //Mapping of students using RobotEntry Component
                                         <RobotEntry
                                             firstname={student.firstName}
                                             lastname={student.lastName}
@@ -78,6 +89,7 @@ class RobotList extends React.Component {
                                             company={student.company}
                                             skill={student.skill}
                                             pic={student.pic}
+                                            key={student.id}
                                         />
                                     )
                                 })}
@@ -86,6 +98,7 @@ class RobotList extends React.Component {
                 </div>
             )
         } else {
+            //If no students returned show no students to render
             return (
                 <div>
                     <h1>No Students to render</h1>

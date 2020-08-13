@@ -15,7 +15,7 @@ class RobotEntry extends React.Component {
     addTag = (event) => {
         let newTag = this.state.tag.trim()
         let updatedTags = this.state.tags.concat(newTag)
-        this.setState({ tags: updatedTags })
+        this.setState({ tags: updatedTags, tag: '' })
         event.preventDefault()
     }
 
@@ -34,7 +34,6 @@ class RobotEntry extends React.Component {
             firstname,
             lastname,
             email,
-            city,
             grades,
             company,
             skill,
@@ -49,7 +48,7 @@ class RobotEntry extends React.Component {
         return (
             <div className='entryContainer'>
                 <div className='imageContainer'>
-                    <img className='image' src={pic} />
+                    <img className='image' src={pic} alt='User avatar' />
                 </div>
                 <div className='informationContainer'>
                     <h1 className='headerText'>
@@ -84,7 +83,7 @@ class RobotEntry extends React.Component {
                                     <form onSubmit={this.addTag}>
                                         <input
                                             className='add-tag-input'
-                                            value={this.state.tagsInput}
+                                            value={this.state.tag}
                                             onChange={(e) => {
                                                 this.updateTagValue(
                                                     e.target.value

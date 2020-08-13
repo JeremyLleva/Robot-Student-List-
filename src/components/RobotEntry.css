@@ -32,7 +32,7 @@
 }
 .expand-btn-container {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .expand-btn {
     height: 100px;
@@ -50,16 +50,20 @@
 }
 .tags {
     border: solid;
-    border-radius: 15%;
+    background-color: grey;
+    border-radius: 10%;
+    color: white;
     margin: 10px;
     padding: 10px;
 }
 .formContainer {
     display: flex;
     align-items: center;
-    margin: 10;
+    margin: 20;
 }
 .add-tag-input {
     height: 50px;
     font-size: 45px;
+
+    margin: 10px;
 }
